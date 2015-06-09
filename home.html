@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Breakfast Burrito Friday</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-flash.min.css">
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body ng-app="burritoApp" ng-controller="MainController">
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <div flash-message="10000"></div>
+        <button class="logout-button" ng-show="isLoggedIn" ng-click="logout()">logout</button>
+        <div class="row">
+            <div class="twelve columns" style="margin-top: 15%" ng-hide="isLoggedIn">
+                <h4 style="text-align:center;">Welcome to Breakfast Burrito Friday</h4>
+                <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+            </div>
+            <div class="twelve columns" style="margin-top: 15%" ng-show="isLoggedIn">
+                <h4 style="text-align:center;">Choose your Burrito amongst our infinite choice</h4>
+                <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="eight columns">
+                <div ng-hide="isLoggedIn" class="offset-by-four columns">
+                    <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
+                    <input ng-model="newUser.password" type='text' id='passwordInput' placeholder='Password'>
+                    <button ng-click="createUser(newUser)">Make me a user!</button>
+                    <button ng-click="login(newUser)">Login!</button>
+                </div>
+            </div>
+        </div>
+        <!--Burrito selection when logged in.-->
+        <div class="row" ng-show="isLoggedIn">
+            <div id="grid" class="grid">
+                <figure class='item effect-ruby'>
+                    <img class='image' src='images/cheese.jpg' />
+                    <figcaption>
+                        <h2><span>Cheese</span></h2>
+                        <p>Only for Frenchmen... or women</p>
+                    </figcaption>
+                </figure>
+                <figure class='item effect-ruby'>
+                    <img class='image' src='images/chorizo.jpg' />
+                    <figcaption>
+                        <h2><span>Chorizo</span></h2>
+                        <p>Like it spicy? Get it hot!</p>
+                    </figcaption>
+                </figure>
+                <figure class='item effect-ruby'>
+                    <img class='image' src='images/sausage.jpg' />
+                    <figcaption>
+                        <h2><span>Sausage</span></h2>
+                        <p>Just how you love it!</p>
+                    </figcaption>
+                </figure>
+                <figure class='item effect-ruby'>
+                    <img class='image' src='images/bacon.jpg' />
+                    <figcaption>
+                        <h2><span>Bacon</span></h2>
+                        <p>Chrunchy just like you want it!</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-animate.min.js"></script>
+    <script src="js/angular-flash.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.min.js"></script>
+    <script src="js/isotope.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    </script>
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>
