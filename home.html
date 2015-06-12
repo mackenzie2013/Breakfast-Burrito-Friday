@@ -58,14 +58,22 @@
     <div class="container" style="width:100%;">
         <div class="row">
             <div class="twelve columns" style="margin-top: 10%" ng-hide="isLoggedIn">
-                <h4 style="text-align:center;">Welcome to Breakfast Burrito Friday</h4>
+                <h4 style="text-align:center;">It's Breakfast Burrito Friday!</h4>
             </div>
             <div class="twelve columns" style="margin-top: 10%" ng-show="isLoggedIn">
                 <h4 style="text-align:center;">Choose your Burrito amongst our infinite choice</h4>
                 <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
             </div>
         </div>
-        <div class="row" ng-hide="isLoggedIn">
+        <div class="row stats">
+            <div class="six columns" style="text-align:center;">
+            Burritos Ordered For {{formatedDate}} 
+            </div>
+            <div class="six columns"  style="text-align:center;">
+            DragonDev's Burrito Stats
+            </div>
+        </div>
+        <!--<div class="row" ng-hide="isLoggedIn">
             <div class="twelve columns offset-by-four column">
                 <div class="sign-up-form">
                     <h2>Sign Up!</h2>
@@ -78,7 +86,7 @@
                     <button ng-click="createUser(newUser)">Make me a user!</button>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <!--Burrito selection when logged in.-->
     <div class="row " ng-show="isLoggedIn ">

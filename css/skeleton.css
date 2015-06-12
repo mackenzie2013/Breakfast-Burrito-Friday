@@ -903,3 +903,8 @@ li .close {
 .sign-up-form {
     visibility: hidden;
 }
+
+
+.row.stats .six.columns:nth-child(1){
+    border-right: 2px solid rgba(255,255,255,0.2);
+}
