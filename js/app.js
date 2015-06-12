@@ -71,6 +71,11 @@
         });
     };
 
+    $scope.deleteOrder = function (itemID){
+        var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate + "/" + itemID);
+        orderRef.remove();
+    };
+
     $scope.totalBurritosOrdered = function() {
         myOrderRef.on("value", function(snapshot) {
             $scope.totalBurritoOrders = 0;
@@ -81,7 +86,7 @@
             });
         });
     };
-    
+
     $scope.totalBurritosOrdered();
     $scope.listUserBurritos();
 
@@ -219,7 +224,7 @@
         if ($scope.isLoggedIn == true) {
             $scope.listUserBurritos();
         }
-    }, 5000);
+    }, 1000);
 
     setInterval(function() {
 

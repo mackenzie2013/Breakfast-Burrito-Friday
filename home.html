@@ -48,7 +48,7 @@
                 <ul>
                     <p>Your orders: </p>
                     <li ng-repeat="item in userOrders">{{ item.flavor }}
-                        <div class="close" ng-id="{{item.id}}">x</div>
+                        <div class="close" ng-click="deleteOrder(item.$id)">x</div>
                     </li>
                 </ul>
             </div>
@@ -65,6 +65,41 @@
                 <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
             </div>
         </div>
+    </div>
+    <!--Burrito selection when logged in.-->
+    <div class="row " ng-show="isLoggedIn ">
+        <div id="grid " class="grid ">
+            <figure class='item effect-ruby' ng-click="order('Cheese')">
+                <img class='image' src='images/cheese.jpg' />
+                <figcaption>
+                    <h2><span>Cheese</span></h2>
+                    <p>Only for Frenchmen... or women</p>
+                </figcaption>
+            </figure>
+            <figure class='item effect-ruby' ng-click="order('Chorizo')">
+                <img class='image' src='images/chorizo.jpg' />
+                <figcaption>
+                    <h2><span>Chorizo</span></h2>
+                    <p>Like it spicy? Get it hot!</p>
+                </figcaption>
+            </figure>
+            <figure class='item effect-ruby' id="Sausage " ng-click="order( 'Sausage') ">
+                <img class='image' src='images/sausage.jpg' />
+                <figcaption>
+                    <h2><span>Sausage</span></h2>
+                    <p>Just how you love it!</p>
+                </figcaption>
+            </figure>
+            <figure class='item effect-ruby' id="Bacon " ng-click="order( 'Bacon') ">
+                <img class='image' src='images/bacon.jpg' />
+                <figcaption>
+                    <h2><span>Bacon</span></h2>
+                    <p>Chrunchy just like you want it!</p>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="container">
         <div class="row stats">
             <div class="six columns" style="text-align:center;">
                 <h5>Burritos Ordered For {{incomingFriday}}</h5>
@@ -107,51 +142,18 @@
                 </div>
             </div>
         </div>
-        <div class="row form" ng-hide="isLoggedIn">
-            <div class="sign-up-form">
-                <div class="close">x</div>
-                <h2>Sign Up!</h2>
-                <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
-                <br />
-                <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
-                <br />
-                <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
-                <br />
-                <button ng-click="createUser(newUser)">Make me a user!</button>
-            </div>
-        </div>
     </div>
-    <!--Burrito selection when logged in.-->
-    <div class="row " ng-show="isLoggedIn ">
-        <div id="grid " class="grid ">
-            <figure class='item effect-ruby' ng-click="order('Cheese')">
-                <img class='image' src='images/cheese.jpg' />
-                <figcaption>
-                    <h2><span>Cheese</span></h2>
-                    <p>Only for Frenchmen... or women</p>
-                </figcaption>
-            </figure>
-            <figure class='item effect-ruby' ng-click="order('Chorizo')">
-                <img class='image' src='images/chorizo.jpg' />
-                <figcaption>
-                    <h2><span>Chorizo</span></h2>
-                    <p>Like it spicy? Get it hot!</p>
-                </figcaption>
-            </figure>
-            <figure class='item effect-ruby' id="Sausage " ng-click="order( 'Sausage') ">
-                <img class='image' src='images/sausage.jpg' />
-                <figcaption>
-                    <h2><span>Sausage</span></h2>
-                    <p>Just how you love it!</p>
-                </figcaption>
-            </figure>
-            <figure class='item effect-ruby' id="Bacon " ng-click="order( 'Bacon') ">
-                <img class='image' src='images/bacon.jpg' />
-                <figcaption>
-                    <h2><span>Bacon</span></h2>
-                    <p>Chrunchy just like you want it!</p>
-                </figcaption>
-            </figure>
+    <div class="row form" ng-hide="isLoggedIn">
+        <div class="sign-up-form">
+            <div class="close">x</div>
+            <h2>Sign Up!</h2>
+            <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
+            <br />
+            <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
+            <br />
+            <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
+            <br />
+            <button ng-click="createUser(newUser)">Make me a user!</button>
         </div>
     </div>
     </div>
