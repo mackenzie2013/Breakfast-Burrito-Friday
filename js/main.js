@@ -13,5 +13,5 @@ $(document).ready(function() {
         $(".sign-up-form").css('visibility', 'visible').hide().fadeIn(1000);
     });
 
-    $(".user-order-list").addClass("loading");
+   
 });

@@ -41,15 +41,6 @@
         });
     };
 
-    auth = myFireRef.getAuth();
-    /* Check user's session state */
-    if (auth) {
-        $scope.isLoggedIn = true;
-        $scope.listUserBurritos();
-    } else {
-        $scope.isLoggedIn = false;
-    }
-
 
     $scope.confirmOrder = function(burritoFlavor) {
         var message = "Congratulations human! You ordered a " + burritoFlavor + " burrito!"
@@ -70,12 +61,7 @@
 
     /* Prepare Firebase query */
     $scope.order = function(id) {
-
-        if (weekday[today.getDay()] == "Friday") {
-            $scope.addToOrder(id, weekday[today.getDay()], auth.uid);
-        } else {
-            $scope.addToOrder(id, formatedDate, auth.uid);
-        }
+        $scope.addToOrder(id, formatedDate, auth.uid);
     };
 
 
@@ -120,6 +106,7 @@
                 Flash.create('success', success, 'flash-message');
                 auth = myFireRef.getAuth();
                 $scope.listUserBurritos();
+                jQuery.ready();
                 $scope.isLoggedIn = true;
             }
         });
@@ -169,10 +156,37 @@
         });
     };
 
-    setInterval(function() {
-        if ($scope.isLoggedIn === true)
+    /* Check user's session state */
+    var auth = myFireRef.getAuth();
+    setTimeout(function() {
+        auth = myFireRef.getAuth();
+        if (auth) {
+            $scope.isLoggedIn = true;
             $scope.listUserBurritos();
+        } else {
+            $scope.isLoggedIn = false;
+        }
+
+    }, 100);
+
+
+    setInterval(function() {
+        if ($scope.isLoggedIn == true) {
+            $scope.listUserBurritos();
+        }
     }, 5000);
+
+    setInterval(function() {
+
+        if ($scope.isLoggedIn == true) {
+            if (!$(".user-order-list").hasClass("loading")) {
+                setTimeout(function() {
+                    $(".user-order-list").addClass("loading");
+                }, 500);
+            }
+        }
+    }, 1000);
+
 
 
 })

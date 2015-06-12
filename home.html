@@ -35,7 +35,7 @@
                 <input ng-model="user.email " type='text' id='emailInput' placeholder='Email'>
                 <input ng-model="user.password " type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode== 13 && login(user)">
                 <button ng-click="login(user)">Login!</button>
-                <button class="sign-up-btn">Sign Up!</button>
+                <button id="login-btn" class="sign-up-btn">Sign Up!</button>
             </div>
             <a href="home"><i style=" vertical-align: middle; padding-right:15px;" class="fa fa-home fa-2x"></i></a>
             <a href="profile"><i ng-show="isLoggedIn" style=" vertical-align: middle; padding-right:15px;" class="fa fa-user fa-2x"></i></a>
@@ -59,7 +59,6 @@
         <div class="row">
             <div class="twelve columns" style="margin-top: 10%" ng-hide="isLoggedIn">
                 <h4 style="text-align:center;">Welcome to Breakfast Burrito Friday</h4>
-                <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the.</p>
             </div>
             <div class="twelve columns" style="margin-top: 10%" ng-show="isLoggedIn">
                 <h4 style="text-align:center;">Choose your Burrito amongst our infinite choice</h4>
