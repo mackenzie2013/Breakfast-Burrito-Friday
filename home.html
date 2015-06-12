@@ -58,35 +58,68 @@
     <div class="container" style="width:100%;">
         <div class="row">
             <div class="twelve columns" style="margin-top: 10%" ng-hide="isLoggedIn">
-                <h4 style="text-align:center;">It's Breakfast Burrito Friday!</h4>
+                <h2 style="text-align:center;">It's Breakfast Burrito Friday!</h2>
             </div>
             <div class="twelve columns" style="margin-top: 10%" ng-show="isLoggedIn">
-                <h4 style="text-align:center;">Choose your Burrito amongst our infinite choice</h4>
+                <h3 style="text-align:center;">Choose your Burrito amongst our infinite choice</h3>
                 <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
             </div>
         </div>
         <div class="row stats">
             <div class="six columns" style="text-align:center;">
-            Burritos Ordered For {{formatedDate}} 
-            </div>
-            <div class="six columns"  style="text-align:center;">
-            DragonDev's Burrito Stats
-            </div>
-        </div>
-        <!--<div class="row" ng-hide="isLoggedIn">
-            <div class="twelve columns offset-by-four column">
-                <div class="sign-up-form">
-                    <h2>Sign Up!</h2>
-                    <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
-                    <br />
-                    <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
-                    <br />
-                    <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
-                    <br />
-                    <button ng-click="createUser(newUser)">Make me a user!</button>
+                <h5>Burritos Ordered For {{incomingFriday}}</h5>
+                <div class="row offset-by-one column">
+                    <div class="two columns">
+                        <span class="counter" id="cheese-counter">{{NumberOfCheeseOrdered}}</span>
+                        <br/><span>Cheese</span>
+                    </div>
+                    <div class="two columns">
+                        <span class="counter" id="chorizo-counter">{{NumberOfChorizoOrdered}}</span>
+                        <br/><span>Chorizo</span>
+                    </div>
+                    <div class="two columns">
+                        <span class="counter">?</span>
+                        <br/><span>Egg</span>
+                    </div>
+                    <div class="two columns">
+                        <span class="counter" id="sausage-counter">{{NumberOfSausageOrdered}}</span>
+                        <br/><span>Sausage</span>
+                    </div>
+                    <div class="two columns">
+                        <span class="counter" id="Bacon-counter">{{NumberOfBaconOrdered}}</span>
+                        <br/><span>Bacon</span>
+                    </div>
                 </div>
             </div>
-        </div>-->
+            <div class="six columns" style="text-align:center;">
+                <h5>DragonDev's Burrito Stats</h5>
+                <div class="row">
+                    <div class="twelve columns">
+                        <span class="counter">{{totalBurritoOrders}}</span>
+                        <span>
+                        <ng-pluralize count="totalBurritoOrders" 
+                         when="{'0': 'burritos ordered.',
+                                '1': 'burrito ordered.',
+                                'other': 'burritos ordered'}">
+                        </ng-pluralize>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form" ng-hide="isLoggedIn">
+            <div class="sign-up-form">
+                <div class="close">x</div>
+                <h2>Sign Up!</h2>
+                <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
+                <br />
+                <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
+                <br />
+                <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
+                <br />
+                <button ng-click="createUser(newUser)">Make me a user!</button>
+            </div>
+        </div>
     </div>
     <!--Burrito selection when logged in.-->
     <div class="row " ng-show="isLoggedIn ">

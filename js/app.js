@@ -22,25 +22,68 @@
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
 
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
     var currentFriday = today.getDate() - today.getDay() + 5; // as a day number in the month
     var thisFriday = new Date(); // This variable will contain the entire date of this friday
 
     thisFriday.setDate(currentFriday);
     formatedDate = thisFriday.getFullYear() + "-" + ("0" + (thisFriday.getMonth() + 1)).slice(-2) + "-" + thisFriday.getUTCDate();
 
+    $scope.incomingFriday = weekday[thisFriday.getDay()] + ", " + month[thisFriday.getMonth()] + " " + thisFriday.getUTCDate();
+
     $scope.listUserBurritos = function() {
+        $scope.NumberOfCheeseOrdered = 0;
+        $scope.NumberOfBaconOrdered = 0;
+        $scope.NumberOfSausageOrdered = 0;
+        $scope.NumberOfChorizoOrdered = 0;
         $scope.userOrders = [];
+        var once = 0;
         var list = $firebaseArray(new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate));
         /* Wait for async call to finish */
         list.$loaded().then(function() {
             list.forEach(function(data) {
-                if (data.uid === auth.uid) {
+                if (data.flavor == "Cheese") {
+                    $scope.NumberOfCheeseOrdered++;
+                } else if (data.flavor == "Chorizo") {
+                    $scope.NumberOfChorizoOrdered++;
+                } else if (data.flavor == "Bacon") {
+                    $scope.NumberOfBaconOrdered++;
+                } else {
+                    $scope.NumberOfSausageOrdered++;
+                }
+                if (auth != null && data.uid === auth.uid) {
                     $scope.userOrders.push(data);
                 }
             });
         });
     };
 
+    $scope.totalBurritosOrdered = function() {
+        myOrderRef.on("value", function(snapshot) {
+            $scope.totalBurritoOrders = 0;
+            snapshot.forEach(function(data) {
+                data.forEach(function(data) {
+                    $scope.totalBurritoOrders++;
+                });
+            });
+        });
+    };
+    
+    $scope.totalBurritosOrdered();
+    $scope.listUserBurritos();
 
     $scope.confirmOrder = function(burritoFlavor) {
         var message = "Congratulations human! You ordered a " + burritoFlavor + " burrito!"
@@ -156,6 +199,8 @@
         });
     };
 
+
+
     /* Check user's session state */
     var auth = myFireRef.getAuth();
     setTimeout(function() {
@@ -186,7 +231,6 @@
             }
         }
     }, 1000);
-
 
 
 })

@@ -185,7 +185,8 @@ html {
 body {
     font-size: 1.5em;
     /* currently ems cause chrome bug misinterpreting rems on body element */
-    display: none;      
+    
+    display: none;
     overflow-x: hidden;
     line-height: 1.6;
     font-weight: 400;
@@ -314,8 +315,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-    color: rgba(255,255,255, 1);
-    border-color: rgba(255,255,255, 1);
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 1);
     outline: 0;
 }
 
@@ -845,7 +846,9 @@ figure.effect-ruby:hover p {
     text-align: center !important;
 }
 
-.alert-success, .alert-danger, .alert-warning{
+.alert-success,
+.alert-danger,
+.alert-warning {
     opacity: .5;
 }
 
@@ -879,9 +882,10 @@ figure.effect-ruby:hover p {
     -o-transition: -o-transform 1s cubic-bezier(.25, 0, .25, 1), opacity 1s cubic-bezier(.25, 0, .25, 1);
     transition: transform 1s cubic-bezier(.25, 0, .25, 1), opacity 1s cubic-bezier(.25, 0, .25, 1);
 }
+
 .user-order-list.loading {
-  transform: translateX(0%) scale(1);
-  opacity: 1;
+    transform: translateX(0%) scale(1);
+    opacity: 1;
 }
 
 li {
@@ -901,10 +905,44 @@ li .close {
 }
 
 .sign-up-form {
+    margin: 0 auto;
     visibility: hidden;
+    display: inline-block;  
+    background-color: rgba(0,0,0,.5);
+    border-radius: 5px;
 }
 
+.row.stats {
+    margin-top: 75px
+}
 
-.row.stats .six.columns:nth-child(1){
-    border-right: 2px solid rgba(255,255,255,0.2);
+.row.stats .six.columns:nth-child(2) {
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.counter {
+    font-size: 3.8rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+.overlay {
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.sign-up-form .close{
+    color:white;
+    opacity: 1;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+.sign-up-form .close:hover{
+    color:rgba(0,0,0,.5);
 }
