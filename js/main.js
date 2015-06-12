@@ -4,6 +4,14 @@ $(document).ready(function() {
         layoutMode: 'fitRows'
     });
 
+    $('body').fadeIn(1000);
+
     $("#grid").isotope("layout");
     $("#grid").isotope('shuffle');
+
+    $(".sign-up-btn").click(function() {
+        $(".sign-up-form").css('visibility', 'visible').hide().fadeIn(1000);
+    });
+
+    $(".user-order-list").addClass("loading");
 });
