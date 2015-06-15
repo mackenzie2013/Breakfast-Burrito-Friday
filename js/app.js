@@ -70,7 +70,7 @@
                             modifiedOrder["id"] = order.key();
                             $scope.userOrders.push(modifiedOrder);
                             $scope.totalUserBurritoCount++;
-                            if($scope.totalUserBurritoCount < 10)
+                            if ($scope.totalUserBurritoCount < 10)
                                 $scope.userAchievementMessage = "You are a Baby Burrito!"
                         }
                         $scope.totalBurritoOrders++;
@@ -79,6 +79,28 @@
             });
 
         };
+
+        $scope.listUserOrders = function(itemID) {
+            var users = {};
+            myUserRef.on("value", function(snapshot) {
+                snapshot.forEach(function(data) {
+                    users[data.key()] = data.val().name;
+                });
+            });
+
+            myOrderRef.on("value", function(snapshot) {
+                snapshot.forEach(function(data) {
+                    data.forEach(function(order) {
+                        var burrito = order.val();
+                        if (burrito.flavor == "Cheese" && itemID == "cheese-counter") {
+
+                        }
+                    });
+                });
+            });
+        };
+
+        $scope.listUserOrders("cheese-counter");
 
         $scope.deleteOrder = function(itemID) {
             var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate + "/" + itemID);

@@ -918,6 +918,15 @@ li .close {
     border-left: 2px solid rgba(255, 255, 255, 0.2);
 }
 
+@media (max-width: 580px){
+    .row.stats .six.columns:nth-child(2){
+        border-left: none;
+        margin-top: 15vh;
+        display: block;
+    }
+
+}
+
 .counter {
     font-size: 3.8rem;
     font-weight: 300;
