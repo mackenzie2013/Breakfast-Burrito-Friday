@@ -831,8 +831,11 @@ figure.effect-ruby:hover p {
 
 .flash-message {
     position: absolute !important;
-    bottom: 0;
-    width: 100%;
+    top: 15vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50%;
     height: 25px !important;
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -843,13 +846,8 @@ figure.effect-ruby:hover p {
 }
 
 .alert {
+    text-shadow: none;
     text-align: center !important;
-}
-
-.alert-success,
-.alert-danger,
-.alert-warning {
-    opacity: .5;
 }
 
 .navbar {
@@ -907,8 +905,8 @@ li .close {
 .sign-up-form {
     margin: 0 auto;
     visibility: hidden;
-    display: inline-block;  
-    background-color: rgba(0,0,0,.5);
+    display: inline-block;
+    background-color: rgba(0, 0, 0, .5);
     border-radius: 5px;
 }
 
@@ -927,7 +925,7 @@ li .close {
 }
 
 .overlay {
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -936,13 +934,13 @@ li .close {
     position: fixed;
 }
 
-.sign-up-form .close{
-    color:white;
+.sign-up-form .close {
+    color: white;
     opacity: 1;
     margin-right: 8px;
     margin-top: 5px;
 }
 
-.sign-up-form .close:hover{
-    color:rgba(0,0,0,.5);
+.sign-up-form .close:hover {
+    color: rgba(0, 0, 0, .5);
 }

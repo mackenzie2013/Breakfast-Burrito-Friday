@@ -45,8 +45,26 @@
         <div flash-message="2000"></div>
         <!-- Change password Form -->
         <div class="row">
-            <div class="eight columns" style="margin-top:15%;">
-                <div class="offset-by-one columns">
+            <div class="twelve columns" style="text-align:center;">
+                <h5>Your Burrito Stats</h5>
+                <div class="row">
+                    <span class="counter">{{totalUserBurritoCount}}</span>
+                    <span>
+                        <ng-pluralize count="totalBurritoOrders" 
+                         when="{'0': 'burritos ordered.',
+                                '1': 'burrito ordered.',
+                                'other': 'burritos ordered'}">
+                        </ng-pluralize>
+                    </span>
+                    <span><br />
+                        Congratulations! {{userAchievementMessage}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="isLoggedIn">
+            <div class="twelve columns" style="margin-top:15%;">
+                <form style="display:inline-block;">
                     <p> Change your password over here!</p>
                     <input ng-model="user.email" type='text' id='emailInput' placeholder='Email'>
                     <br/>
@@ -55,7 +73,7 @@
                     <input ng-model="user.newPassword" type='password' id='passwordInput' placeholder='New Password'>
                     <br/>
                     <button ng-click="changePassword(user)">Change Password!</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
