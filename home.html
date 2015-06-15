@@ -24,6 +24,17 @@
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+    .burritoCount {
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+    .burritoCount > div {
+        width: 25%;
+        float: left;
+    }
+    </style>
 </head>
 
 <body ng-app="burritoApp" ng-controller="MainController">
@@ -61,7 +72,7 @@
                 <h2 style="text-align:center;">It's Breakfast Burrito Friday!</h2>
             </div>
             <div class="twelve columns" style="margin-top: 10%" ng-show="isLoggedIn">
-                <h3 style="text-align:center;">Choose your Burrito amongst our infinite and finest choice</h3>
+                <h3 style="text-align:center;">Choose your burrito from amongst our expansive options</h3>
                 <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
             </div>
         </div>
@@ -103,8 +114,8 @@
         <div class="row stats">
             <div class="six columns" style="text-align:center;">
                 <h5>Burritos Ordered For {{incomingFriday}}</h5>
-                <div class="row offset-by-one column">
-                    <div class="two columns">
+                <div class="row column burritoCount">
+                    <div class="two columns offset-by-two columns">
                         <span class="counter" id="cheese-counter">{{NumberOfCheeseOrdered}}</span>
                         <br/><span>Cheese</span>
                     </div>
@@ -113,14 +124,10 @@
                         <br/><span>Chorizo</span>
                     </div>
                     <div class="two columns">
-                        <span class="counter">?</span>
-                        <br/><span>Random</span>
-                    </div>
-                    <div class="two columns">
                         <span class="counter" id="sausage-counter">{{NumberOfSausageOrdered}}</span>
                         <br/><span>Sausage</span>
                     </div>
-                    <div class="two columns">
+                    <div class="">
                         <span class="counter" id="Bacon-counter">{{NumberOfBaconOrdered}}</span>
                         <br/><span>Bacon</span>
                     </div>
