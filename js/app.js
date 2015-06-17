@@ -42,65 +42,44 @@
         formatedDate = thisFriday.getFullYear() + "-" + ("0" + (thisFriday.getMonth() + 1)).slice(-2) + "-" + thisFriday.getUTCDate();
 
         $scope.incomingFriday = weekday[thisFriday.getDay()] + ", " + month[thisFriday.getMonth()] + " " + thisFriday.getUTCDate();
+        var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate);
 
         $scope.listUserBurritos = function() {
-            $scope.NumberOfCheeseOrdered = 0;
-            $scope.NumberOfBaconOrdered = 0;
-            $scope.NumberOfSausageOrdered = 0;
-            $scope.NumberOfChorizoOrdered = 0;
             $scope.userOrders = [];
-            var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate);
+            $scope.allTheOrders = [];
+            $scope.flavors = {};
+            $scope.totalBurritoOrders = 0;
+            $scope.totalUserBurritoCount = 0;
 
             myOrderRef.on("value", function(snapshot) {
-                $scope.totalBurritoOrders = 0;
-                $scope.totalUserBurritoCount = 0;
                 snapshot.forEach(function(data) {
-                    data.forEach(function(order) {
-                        if (order.val().flavor == "Cheese") {
-                            $scope.NumberOfCheeseOrdered++;
-                        } else if (order.val().flavor == "Chorizo") {
-                            $scope.NumberOfChorizoOrdered++;
-                        } else if (order.val().flavor == "Bacon") {
-                            $scope.NumberOfBaconOrdered++;
-                        } else {
-                            $scope.NumberOfSausageOrdered++;
-                        }
-                        if (auth != null && order.val().uid === auth.uid) {
-                            modifiedOrder = order.val();
-                            modifiedOrder["id"] = order.key();
-                            $scope.userOrders.push(modifiedOrder);
-                            $scope.totalUserBurritoCount++;
-                            if ($scope.totalUserBurritoCount < 10)
-                                $scope.userAchievementMessage = "You are a Baby Burrito!"
-                        }
-                        $scope.totalBurritoOrders++;
-                    });
+                    $scope.totalBurritoOrders += data.numChildren();
                 });
+            });
+
+            orderRef.on("value", function(snapshot) {
+                snapshot.forEach(function(order) {;
+                    $scope.allTheOrders.push(order.val());
+                    if (typeof $scope.flavors[order.val().flavor] == 'undefined')
+                        $scope.flavors[order.val().flavor] = [];
+
+                    $scope.flavors[order.val().flavor].push(order.val());
+                    if (auth != null && order.val().uid === auth.uid) {
+                        modifiedOrder = order.val();
+                        modifiedOrder["id"] = order.key();
+                        $scope.userOrders.push(modifiedOrder);
+                        $scope.totalUserBurritoCount++;
+                        if ($scope.totalUserBurritoCount < 10)
+                            $scope.userAchievementMessage = "You are a Baby Burrito!"
+                    }
+                })
             });
 
         };
 
-        $scope.listUserOrders = function(itemID) {
-            var users = {};
-            myUserRef.on("value", function(snapshot) {
-                snapshot.forEach(function(data) {
-                    users[data.key()] = data.val().name;
-                });
-            });
 
-            myOrderRef.on("value", function(snapshot) {
-                snapshot.forEach(function(data) {
-                    data.forEach(function(order) {
-                        var burrito = order.val();
-                        if (burrito.flavor == "Cheese" && itemID == "cheese-counter") {
 
-                        }
-                    });
-                });
-            });
-        };
 
-        $scope.listUserOrders("cheese-counter");
 
         $scope.deleteOrder = function(itemID) {
             var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate + "/" + itemID);

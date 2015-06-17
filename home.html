@@ -58,7 +58,7 @@
             <div class="user-order-list">
                 <ul>
                     <p>Your orders: </p>
-                    <li ng-repeat="item in userOrders">{{ item.flavor }}
+                    <li ng-repeat="item in userOrders | limitTo: 10">{{ item.flavor }}
                         <div class="close" ng-click="deleteOrder(item.id)">x</div>
                     </li>
                 </ul>
@@ -115,23 +115,14 @@
             <div class="six columns" style="text-align:center;">
                 <h5>Burritos Ordered For {{incomingFriday}}</h5>
                 <div class="row column burritoCount">
-                    <div class="two columns offset-by-two columns">
-                        <span class="counter" id="cheese-counter">{{NumberOfCheeseOrdered}}</span>
-                        <br/><span>Cheese</span>
-                    </div>
-                    <div class="two columns">
-                        <span class="counter" id="chorizo-counter">{{NumberOfChorizoOrdered}}</span>
-                        <br/><span>Chorizo</span>
-                    </div>
-                    <div class="two columns">
-                        <span class="counter" id="sausage-counter">{{NumberOfSausageOrdered}}</span>
-                        <br/><span>Sausage</span>
-                    </div>
-                    <div class="">
-                        <span class="counter" id="Bacon-counter">{{NumberOfBaconOrdered}}</span>
-                        <br/><span>Bacon</span>
+                    <div class="two columns" ng-repeat="(flavor, burritos) in flavors">
+                        <span class="counter" id="Bacon-counter">{{burritos.length}}</span>
+                        <br/><span>{{flavor}}</span>
                     </div>
                 </div>
+                <li ng-repeat="item in allTheOrders | filter: {flavor: ''}">
+                    {{ item.uid }} {{ item.flavor }} {{item.orderedDate}}
+                </li>
             </div>
             <div class="six columns" style="text-align:center;">
                 <h5>DragonDev's Burrito Stats</h5>
