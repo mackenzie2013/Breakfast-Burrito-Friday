@@ -70,7 +70,7 @@
             <li ng-repeat="item in allTheOrders | filter: {flavor: ''}">
                 {{ item.uid }} {{ item.flavor }} {{item.orderedDate}}
             </li>
-            <div ng-hide="filteredItems.length">No items found</div>
+            <div ng-hide="allTheOrders.length">No items found</div>
         </div>
         <div class="six columns" style="text-align:center;">
             <h5>DragonDev's Burrito Stats</h5>
