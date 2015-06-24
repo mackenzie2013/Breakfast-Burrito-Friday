@@ -1,0 +1,9 @@
+{
+  "firebase": "bbfriday",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

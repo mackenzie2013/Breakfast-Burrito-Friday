@@ -1,0 +1,105 @@
+<div class="row" ng-show="auth != null">
+    <div class="eight  columns">
+        <div class="user-order-list">
+            <ul>
+                <p>Your orders: </p>
+                <li ng-repeat="item in userOrders">{{ item.flavor }}
+                    <div class="close" ng-click="deleteOrder(item.id)">x</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div flash-message="2000"></div>
+<div class="container" style="width:100%;">
+    <div class="row">
+        <div class="twelve columns" style="margin-top: 10%" ng-hide="auth != null">
+            <h2 style="text-align:center;">It's Breakfast Burrito Friday!</h2>
+        </div>
+        <div class="twelve columns" style="margin-top: 10%" ng-show="auth != null">
+            <h3 style="text-align:center;">Choose your burrito from amongst our expansive options</h3>
+            <p>Our Burritos are droid-crafted by droids, they are made with much love and steel. Please make sure to order as much as possible!</p>
+        </div>
+    </div>
+</div>
+<!--Burrito selection when logged in.-->
+<div class="row " ng-show="auth">
+
+    <div id="grid " class="grid ">
+        <figure class='item effect-ruby' ng-click="order('Cheese')">
+            <img class='image' src='images/cheese.jpg' />
+            <figcaption>
+                <h2><span>Cheese</span></h2>
+                <p>Only for Frenchmen... or women</p>
+            </figcaption>
+        </figure>
+        <figure class='item effect-ruby' ng-click="order('Chorizo')">
+            <img class='image' src='images/chorizo.jpg' />
+            <figcaption>
+                <h2><span>Chorizo</span></h2>
+                <p>Like it spicy? Get it hot!</p>
+            </figcaption>
+        </figure>
+        <figure class='item effect-ruby' id="Sausage " ng-click="order( 'Sausage') ">
+            <img class='image' src='images/sausage.jpg' />
+            <figcaption>
+                <h2><span>Sausage</span></h2>
+                <p>Just how you love it!</p>
+            </figcaption>
+        </figure>
+        <figure class='item effect-ruby' id="Bacon " ng-click="order( 'Bacon') ">
+            <img class='image' src='images/bacon.jpg' />
+            <figcaption>
+                <h2><span>Bacon</span></h2>
+                <p>Crunchy just like you want it!</p>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+<!-- The Burrito Stats -->
+<div class="container">
+    <div class="row stats">
+        <div class="six columns" style="text-align:center;">
+            <h5>Burritos Ordered For {{incomingFriday}}</h5>
+            <div class="row column burritoCount">
+                <div class="two columns" ng-repeat="(flavor, burritos) in flavors">
+                    <span class="counter" id="Bacon-counter">{{burritos.length}}</span>
+                    <br/><span>{{flavor}}</span>
+                </div>
+            </div>
+            <li ng-repeat="item in allTheOrders | filter: {flavor: ''}">
+                {{ item.uid }} {{ item.flavor }} {{item.orderedDate}}
+            </li>
+            <div ng-hide="filteredItems.length">No items found</div>
+        </div>
+        <div class="six columns" style="text-align:center;">
+            <h5>DragonDev's Burrito Stats</h5>
+            <div class="row">
+                <div class="twelve columns">
+                    <span class="counter">{{totalBurritoOrders}}</span>
+                    <span>
+                        <ng-pluralize count="totalBurritoOrders" 
+                         when="{'0': 'burritos ordered.',
+                                '1': 'burrito ordered.',
+                                'other': 'burritos ordered'}">
+                        </ng-pluralize>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sign up Form -->
+<div class="row form" ng-hide="auth != null">
+    <div class="sign-up-form">
+        <div class="close">x</div>
+        <h2>Sign Up!</h2>
+        <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
+        <br />
+        <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
+        <br />
+        <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
+        <br />
+        <button ng-click="createUser(newUser)">Make me a user!</button>
+    </div>
+</div>
