@@ -71,7 +71,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 
         $scope.totalUserBurritoCount = 0;
         $scope.totalBurritoOrders = 0;
-        $scope.userAchievementMessage = "";
+        $scope.userAchievementMessage;
         // Counts the total number of orders
         myOrderRef.on("value", function(snapshot) {
             snapshot.forEach(function(data) {
@@ -94,7 +94,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
                     $scope.userOrders.push(modifiedOrder);
                     $scope.totalUserBurritoCount++;
                 }
-                if ($scope.totalUserBurritoCount < 10 || $scope.totalUserBurritoCount ==)
+                if ($scope.totalUserBurritoCount < 10)
                     $scope.userAchievementMessage = "Can't you order more?"
 
             });
