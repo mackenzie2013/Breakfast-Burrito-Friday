@@ -175,7 +175,7 @@ are based on 10px sizing. So basically 1.5rem = 15px :) */
 
 html {
     font-size: 62.5%;
-    background: url(//static.wallhaven.cc/images/layout/blue-gradients.020-wh.jpg) no-repeat center center fixed;
+    background: url(../images/background-wh.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

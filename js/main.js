@@ -18,7 +18,4 @@ $(document).ready(function() {
         $(".row.form.overlay").removeClass("overlay");
         $(".sign-up-form").css('visibility', 'visible').hide().fadeOut(1000);
     });
-
-
-
 });
