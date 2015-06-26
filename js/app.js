@@ -2,14 +2,12 @@
 
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {
-        templateUrl: 'templates/home.html',
-        controller: 'MainController'
+        templateUrl: 'templates/home.html'
     });
 
     // route for the profile page
     $routeProvider.when('/profile', {
-        templateUrl: 'templates/profile.html',
-        controller: 'MainController'
+        templateUrl: 'templates/profile.html'
     });
     $routeProvider.otherwise({
         redirectTo: '/'
@@ -78,12 +76,17 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
                 $scope.totalBurritoOrders += data.numChildren();
             });
         });
+        var i = 0;
         // Current Friday orders and user orders
-
         orderRef.on("value", function(snapshot) {
             snapshot.forEach(function(order) {
-                $scope.allTheOrders.push(order.val());
-
+                myUserRef.child(order.val().uid).on('value', function(snap) {
+                    $scope.allTheOrders.push({
+                        flavor: order.val().flavor,
+                        orderedDate: order.val().orderedDate,
+                        name: snap.val().name
+                    });
+                });
                 if (typeof $scope.flavors[order.val().flavor] == 'undefined')
                     $scope.flavors[order.val().flavor] = [];
 
@@ -238,8 +241,9 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
     setInterval(function() {
         $timeout(function() {
             $scope.listUserBurritos();
-        }, 500);
+        }, 1000);
     }, 1000);
+
     setInterval(function() {
         if ($scope.auth) {
             if (!$(".user-order-list").hasClass("loading")) {

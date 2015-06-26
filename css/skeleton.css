@@ -903,11 +903,15 @@ li .close {
 }
 
 .sign-up-form {
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     visibility: hidden;
     display: inline-block;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .8);
     border-radius: 5px;
+    padding: 20px;
 }
 
 .row.stats {
@@ -918,13 +922,12 @@ li .close {
     border-left: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 580px){
-    .row.stats .six.columns:nth-child(2){
+@media (max-width: 580px) {
+    .row.stats .six.columns:nth-child(2) {
         border-left: none;
         margin-top: 15vh;
         display: block;
     }
-
 }
 
 .counter {
@@ -952,4 +955,11 @@ li .close {
 
 .sign-up-form .close:hover {
     color: rgba(0, 0, 0, .5);
+}
+
+.friday-listing {
+    padding:10px;
+    display: block;
+    font-size: .9em;
+    border-bottom: 1px solid rgba(255,255,255,.2);
 }

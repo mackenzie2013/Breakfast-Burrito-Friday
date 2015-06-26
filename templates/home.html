@@ -24,7 +24,6 @@
 </div>
 <!--Burrito selection when logged in.-->
 <div class="row " ng-show="auth">
-
     <div id="grid " class="grid ">
         <figure class='item effect-ruby' ng-click="order('Cheese')">
             <img class='image' src='images/cheese.jpg' />
@@ -67,9 +66,11 @@
                     <br/><span>{{flavor}}</span>
                 </div>
             </div>
-            <li ng-repeat="item in allTheOrders | filter: {flavor: ''}">
-                {{ item.uid }} {{ item.flavor }} {{item.orderedDate}}
-            </li>
+            <div class="row twelve columns" style="margin-top:20px;">
+                <div class="friday-listing" ng-repeat="item in allTheOrders | filter: {flavor: ''}">
+                    {{ item.name }} ordered a {{ item.flavor }} burrito at {{item.orderedDate}}
+                </div>
+            </div>
             <div ng-hide="allTheOrders.length">No items found</div>
         </div>
         <div class="six columns" style="text-align:center;">
@@ -87,19 +88,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Sign up Form -->
-<div class="row form" ng-hide="auth != null">
-    <div class="sign-up-form">
-        <div class="close">x</div>
-        <h2>Sign Up!</h2>
-        <input ng-model="newUser.name" type='text' id='nameInput' placeholder='Name'>
-        <br />
-        <input ng-model="newUser.email" type='text' id='emailInput' placeholder='Email'>
-        <br />
-        <input ng-model="newUser.password" type='password' id='passwordInput' placeholder='Password' ng-keyup="$event.keyCode == 13 && login(newUser)">
-        <br />
-        <button ng-click="createUser(newUser)">Make me a user!</button>
     </div>
 </div>
