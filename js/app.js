@@ -99,7 +99,6 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
                 }
                 if ($scope.totalUserBurritoCount < 10)
                     $scope.userAchievementMessage = "Can't you order more?"
-
             });
         });
     };
@@ -139,6 +138,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 
     /* Adds user specific data to Firebase /users */
     $scope.addUserToFireBase = function(user, userInfo) {
+        console.log(user.uid + " + " + userInfo.name);
         myUserRef.child(user.uid).set({
             name: userInfo.name
         });
@@ -158,8 +158,9 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 
             } else {
                 var success = "You have successfully signed up! Welcome" + newUser.name;
-                $scope.addUserToFireBase(userData, newUser);
                 $scope.login(newUser);
+                $scope.addUserToFireBase(userData, newUser);
+
                 Flash.create('success', success, 'flash-message');
             }
         });
