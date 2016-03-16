@@ -39,6 +39,7 @@
     float: left;
     box-sizing: border-box;
 }
+
 /* For devices larger than 400px */
 
 @media (min-width: 400px) {
@@ -109,7 +110,7 @@
         width: 48%;
     }
     /* Offsets */
-    
+
     .offset-by-one.column,
     .offset-by-one.columns {
         margin-left: 8.66666666667%;
@@ -185,7 +186,7 @@ html {
 body {
     font-size: 1.5em;
     /* currently ems cause chrome bug misinterpreting rems on body element */
-    
+
     display: none;
     overflow-x: hidden;
     line-height: 1.6;
@@ -359,7 +360,7 @@ select {
     height: 38px;
     padding: 6px 10px;
     /* The 6px vertically centers text on FF, ignored by Webkit */
-    
+
     background-color: #fff;
     border: 1px solid #D1D1D1;
     border-radius: 4px;
@@ -751,7 +752,7 @@ figure.effect-ruby:hover p {
 
 .grid figure figcaption {
     /*padding: 2em;*/
-    
+
     color: #fff;
     text-transform: uppercase;
     font-size: 1.25em;
@@ -805,7 +806,7 @@ figure.effect-ruby:hover p {
 .isotope,
 .isotope .isotope-item {
     /* change duration value to whatever you like */
-    
+
     -webkit-transition-duration: 0.8s;
     -moz-transition-duration: 0.8s;
     -ms-transition-duration: 0.8s;

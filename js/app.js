@@ -21,44 +21,28 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
     $scope.$routeParams = $routeParams;
     $scope.auth = false;
     //Our firebase references
-    var myFireRef = new Firebase('https://bbfriday.firebaseio.com/');
-    var myOrderRef = new Firebase('https://bbfriday.firebaseio.com/orders');
-    var myUserRef = new Firebase('https://bbfriday.firebaseio.com/users');
+    var myFireRef = new Firebase('https://breakfastburritos.firebaseio.com/');
+    var myOrderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders');
+    var myUserRef = new Firebase('https://breakfastburritos.firebaseio.com/users');
 
     var today = new Date();
-    var weekday = new Array(7);
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
+    var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-    var month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    function thisFriday(date) {
+      if (date.getDay() == 5) {
+        return new Date(date);
+      }
+      else {
+        return thisFriday(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1));
+      }
+    }
+    var thisFriday = thisFriday(today); // This variable will contain the entire date of this friday
 
-    var currentFriday = today.getDate() - today.getDay() + 5; // as a day number in the month
-    var thisFriday = new Date(); // This variable will contain the entire date of this friday
-
-    thisFriday.setDate(currentFriday);
     formatedDate = thisFriday.getFullYear() + "-" + ("0" + (thisFriday.getMonth() + 1)).slice(-2) + "-" + thisFriday.getUTCDate();
 
     $scope.incomingFriday = weekday[thisFriday.getDay()] + ", " + month[thisFriday.getMonth()] + " " + thisFriday.getUTCDate();
-    var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate);
-
-    //    console.log($firebaseObject(orderRef));
+    var orderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders/' + formatedDate);
 
     /* List the user's burritos as well as the total number of burritos. */
     $scope.listUserBurritos = function() {
@@ -98,7 +82,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
                     $scope.totalUserBurritoCount++;
                 }
                 if ($scope.totalUserBurritoCount < 10)
-                    $scope.userAchievementMessage = "Can't you order more?"
+                    $scope.userAchievementMessage = "Are you sure that will be enough?"
             });
         });
     };
@@ -108,7 +92,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 
     /* Deletes a specific user order */
     $scope.deleteOrder = function(itemID) {
-        var orderRef = new Firebase('https://bbfriday.firebaseio.com/orders/' + formatedDate + "/" + itemID);
+        var orderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders/' + formatedDate + "/" + itemID);
         orderRef.remove();
         $scope.listUserBurritos();
     };
