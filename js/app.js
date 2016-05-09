@@ -14,7 +14,6 @@ app.config(function($routeProvider, $locationProvider) {
     });
 });
 
-
 app.controller('MainController', function($scope, $route, $routeParams, $location, $timeout, $firebaseObject, $firebaseArray, $window, Flash) {
     $scope.$route = $route;
     $scope.$location = $location;
@@ -22,8 +21,6 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
     $scope.auth = false;
     //Our firebase references
     var myFireRef = new Firebase('https://breakfastburritos.firebaseio.com/');
-    var myOrderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders');
-    var myUserRef = new Firebase('https://breakfastburritos.firebaseio.com/users');
 
     var today = new Date();
     var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -39,14 +36,12 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
     }
     var thisFriday = thisFriday(today); // This variable will contain the entire date of this friday
 
-    formatedDate = thisFriday.getFullYear() + "-" + ("0" + (thisFriday.getMonth() + 1)).slice(-2) + "-" + thisFriday.getUTCDate();
+    var formattedDate = thisFriday.getFullYear() + "-" + ("0" + (thisFriday.getMonth() + 1)).slice(-2) + "-" + thisFriday.getUTCDate();
 
     $scope.incomingFriday = weekday[thisFriday.getDay()] + ", " + month[thisFriday.getMonth()] + " " + thisFriday.getUTCDate();
-    var orderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders/' + formatedDate);
 
     /* List the user's burritos as well as the total number of burritos. */
     $scope.listUserBurritos = function() {
-
         $scope.userOrders = [];
         $scope.allTheOrders = [];
         $scope.flavors = {};
@@ -55,20 +50,21 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
         $scope.totalBurritoOrders = 0;
         $scope.userAchievementMessage;
         // Counts the total number of orders
-        myOrderRef.on("value", function(snapshot) {
+        myFireRef.child('orders').on("value", function(snapshot) {
             snapshot.forEach(function(data) {
                 $scope.totalBurritoOrders += data.numChildren();
             });
         });
         var i = 0;
         // Current Friday orders and user orders
-        orderRef.on("value", function(snapshot) {
+        myFireRef.child('orders').on("value", function(snapshot) {
             snapshot.forEach(function(order) {
-                myUserRef.child(order.val().uid).on('value', function(snap) {
+                myFireRef.child('users').child(order.val().uid).on('value', function(snap) {
                     $scope.allTheOrders.push({
                         flavor: order.val().flavor,
                         orderedDate: order.val().orderedDate,
-                        name: snap.val().name
+                        name: snap.val().name,
+                        friday: snap.val().friday
                     });
                 });
                 if (typeof $scope.flavors[order.val().flavor] == 'undefined')
@@ -87,16 +83,12 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
         });
     };
 
-
-
-
     /* Deletes a specific user order */
     $scope.deleteOrder = function(itemID) {
-        var orderRef = new Firebase('https://breakfastburritos.firebaseio.com/orders/' + formatedDate + "/" + itemID);
+        var orderRef = myFireRef.child('orders').child(itemID);
         orderRef.remove();
         $scope.listUserBurritos();
     };
-
 
     $scope.confirmOrderMessage = function(burritoFlavor) {
         var message = "Congratulations human! You ordered a " + burritoFlavor + " burrito!"
@@ -104,12 +96,13 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
     };
 
     /* Add order to Firebase */
-    $scope.addToOrder = function(burritoFlavor, formatedDate, userId) {
+    $scope.addToOrder = function(burritoFlavor, formattedDate, userId) {
         var orderDate = new Date();
-        myOrderRef.child(formatedDate).push({
+        myFireRef.child('orders').push({
             flavor: burritoFlavor,
             uid: userId,
-            orderedDate: orderDate.toLocaleDateString() + " " + orderDate.toLocaleTimeString()
+            orderedDate: orderDate.toLocaleDateString() + " " + orderDate.toLocaleTimeString(),
+            friday: formattedDate
         });
         $scope.listUserBurritos();
         $scope.confirmOrderMessage(burritoFlavor);
@@ -117,13 +110,13 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 
     /* Prepare Firebase query */
     $scope.order = function(id) {
-        $scope.addToOrder(id, formatedDate, $scope.auth.uid);
+        $scope.addToOrder(id, formattedDate, $scope.auth.uid);
     };
 
     /* Adds user specific data to Firebase /users */
     $scope.addUserToFireBase = function(user, userInfo) {
         console.log(user.uid + " + " + userInfo.name);
-        myUserRef.child(user.uid).set({
+        myFireRef.child('users').child(user.uid).set({
             name: userInfo.name
         });
     };
@@ -216,10 +209,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
         });
     };
 
-
     /* Check user's session state */
-
-
     $scope.auth = myFireRef.getAuth();
     //Not a nice solution
 
@@ -238,5 +228,4 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
             }
         }
     }, 1000);
-
 });
