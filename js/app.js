@@ -51,9 +51,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
         $scope.userAchievementMessage;
         // Counts the total number of orders
         myFireRef.child('orders').on("value", function(snapshot) {
-            snapshot.forEach(function(data) {
-                $scope.totalBurritoOrders += data.numChildren();
-            });
+            $scope.totalBurritoOrders = snapshot.numChildren();
         });
         var i = 0;
         // Current Friday orders and user orders
